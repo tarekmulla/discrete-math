@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block title %} About {% endblock %} {% block main %}
+
+<div class="about-container d-flex h-100 p-3 mx-auto flex-column">
+  <main role="main" class="inner cover">
+    <div class="about-header">
+      <img src="/static/math-logo.svg" width="40%" alt="logo">
+      <p class="lead about-abstract"><b>Discrete math demo</b> is an application built by
+        <a href="https://www.linkedin.com/in/tarekmulla/">Tarek Mulla</a>, student number <a href="mailto:s3992651@student.rmit.edu.au">s3992651</a>.
+        <br>The purpose of this application is to demonstrate the material of
+        <a href="http://www1.rmit.edu.au/courses/045682">Course MATH2415 - Discrete Mathematics</a> in <a href="https://www.rmit.edu.au/">RMIT University</a>
+        | <a href="https://www.rmit.edu.au/study-with-us/levels-of-study/postgraduate-study/masters-by-coursework/master-of-cyber-security-mc159">Master of Cyber Security</a>.
+      </p>
+    </div>
+
+
+    <div class="source-code">
+      The source code of this application hosted in github, check it out: <a href="https://github.com/tarekmulla/discrete-math">Discrete Math repository</a>
+    </div>
+
+    <div class="source-references">
+      <h3>References and resources used to build this application:</h3>
+      <ul>
+        <li>Logo generated using <a href="https://logo.com/">logo.com</a> website</li>
+        <li>Bootstrap <a href="https://getbootstrap.com/docs">documentation</a></li>
+        <li>Terraform <a href="https://developer.hashicorp.com/terraform/docs">documentation</a></li>
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+{% endblock %}

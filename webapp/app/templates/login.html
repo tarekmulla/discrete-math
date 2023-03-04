@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block title %} Login {% endblock %} {% block main %}
+<div class="login-logo">
+    <img src="/static/math-logo.svg" width="40%" alt="logo">
+</div>
+
+<form action="/login" method="post" class="login-form">
+    <div class="container">
+        <div class="form-group">
+            <input type="email" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <small id="emailHelp" class="form-text text-muted">Only RMIT email accepted</small>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+        </div>
+
+        <div class="login-btn-div">
+            <button class="btn btn-primary login-btn" type="submit">Login</button>
+        </div>
+
+        <hr>
+        <div class="form-group col info-contact">
+            Discrete Math Demo web application
+            <br>
+            Course MATH2415 | Master of Cyber Security | RMIT University
+            <br>
+            for enquiry please contact <a href="mailto:s3992651@student.rmit.edu.au">Tarek Mulla</a>
+        </div>
+    </div>
+</form>
+{% endblock %}

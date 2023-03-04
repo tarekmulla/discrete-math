@@ -1,0 +1,43 @@
+.nav-username {
+    margin-right: 20px;
+}
+
+#icon-navbar{
+    margin-left: 20px;
+}
+
+.login-form .container{
+    width: 50%;
+}
+
+.login-btn {
+    width: 50%;
+}
+
+.login-btn-div {
+    text-align: center;
+    margin: 30px;
+}
+
+.login-logo,
+.info-contact {
+  text-align: center;
+  margin: 50px 0 50px 0;
+}
+
+.about-container {
+    margin: 20px 0 0px 0;
+}
+
+.about-header {
+    text-align: center
+}
+
+.about-abstract {
+    margin: 20px 0 20px 0;
+}
+
+.source-code,
+.source-references {
+    margin: 20px 0 20px 0;
+}
