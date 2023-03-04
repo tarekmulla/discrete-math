@@ -74,6 +74,7 @@ jobs:
         env:
           TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
           TF_VAR_certificate_arn: ${{ vars.CERTIFICATION_ARN }}
+          TF_VAR_container_image: ${{ vars.ECR_URL }}
         run: |
           terraform plan -no-color -input=false
         continue-on-error: true
