@@ -2,8 +2,8 @@ name: Terraform deployment
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+    paths: ['infrastructure/**']
 
   workflow_dispatch: #this attribute will enable the manual run to the pipeline
 

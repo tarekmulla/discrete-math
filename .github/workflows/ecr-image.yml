@@ -2,8 +2,7 @@ name: ECR Image
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
     paths:
       - 'Dockerfile'
       - 'requirments.txt'
