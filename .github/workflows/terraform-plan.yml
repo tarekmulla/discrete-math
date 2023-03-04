@@ -17,16 +17,16 @@ defaults:
 
 env:
   TERRAFORM_VERSION: 1.3.0
-  TERRAFORM_REGION: "ap-southeast-2"
+  TERRAFORM_REGION: ${{ vars.REGION }}
   INFRA_PATH: './infrastructure'
-  WEB_URL: "https://discrete-math.rmit.mulla.au"
+  WEB_URL: ${{ vars.WEB_URL }}
 
 jobs:
   terraform-plan:
     name: Terraform plan
     runs-on: ubuntu-latest
     environment:
-      name: "production"
+      name: production
       url: ${{ env.WEB_URL }}
 
     steps:
