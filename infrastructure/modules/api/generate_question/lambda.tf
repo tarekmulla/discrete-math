@@ -1,6 +1,6 @@
 module "generate_question_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "4.0.1"
+  version = "4.10.1"
 
   function_name = "${var.app}-generate-question"
   description   = "lambda function to generate questions"

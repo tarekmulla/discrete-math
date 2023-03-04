@@ -2,7 +2,7 @@
 
 module "lambda_layer" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "4.0.1"
+  version = "4.10.1"
 
   create_layer = true
 
