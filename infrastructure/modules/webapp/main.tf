@@ -1,19 +1,11 @@
-data "aws_ssm_parameters_by_path" "secrets" {
-  path = "/${var.app}/"
-}
-
-// Create map from all the SSM parameters that related to the app to add it to the fargate tasks environment variables
 locals {
-  env_secrets = [for name in data.aws_ssm_parameters_by_path.secrets.names : {
-    "name" : split("/", name)[3],                                                                                                   // item name
-    "value" : trimspace(data.aws_ssm_parameters_by_path.secrets.values[index(data.aws_ssm_parameters_by_path.secrets.names, name)]) // item value
-  }]
+  webapp_domain = "${var.app}.${var.domain_name}"
 }
 
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
-  cluster_name = "${var.app}"
+  cluster_name = var.app
 
   cluster_configuration = {
     execute_command_configuration = {
@@ -39,7 +31,7 @@ module "ecs" {
 }
 
 resource "aws_ecs_service" "web-app" {
-  name            = "${var.app}"
+  name            = var.app
   cluster         = module.ecs.cluster_id
   task_definition = aws_ecs_task_definition.web-app.arn
   desired_count   = var.ecs_tasks_count
@@ -47,7 +39,7 @@ resource "aws_ecs_service" "web-app" {
 
   load_balancer {
     target_group_arn = module.alb.target_group_arns[0]
-    container_name   = "${var.app}"
+    container_name   = var.app
     container_port   = var.container_port
   }
 
@@ -62,7 +54,7 @@ resource "aws_ecs_service" "web-app" {
 }
 
 resource "aws_ecs_task_definition" "web-app" {
-  family                   = "${var.app}"
+  family                   = var.app
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
@@ -74,13 +66,12 @@ resource "aws_ecs_task_definition" "web-app" {
       image                  = var.container_image
       essential              = true
       readonlyRootFilesystem = false
-      environment            = local.env_secrets
       logConfiguration = {
         logDriver = "awslogs"
         options = {
           awslogs-group         = "/fargate/service/${var.app}-fargate-log"
           awslogs-stream-prefix = "ecs"
-          awslogs-region        = "us-east-1"
+          awslogs-region        = var.region
         }
       }
       portMappings = [

@@ -1,11 +1,16 @@
 variable "app" {
   type        = string
-  description = "Name of the application"
+  description = "The application name"
 }
 
-variable "env" {
+variable "region" {
   type        = string
-  description = "Name of the environment"
+  description = "The aws region where the resources will be provisioned"
+}
+
+variable "tags" {
+  description = "AWS Tags to add to all resources created (where possible)"
+  type        = map(string)
 }
 
 variable "vpc_id" {
@@ -26,14 +31,15 @@ variable "private_subnet_ids" {
 variable "container_port" {
   type        = number
   description = "Container port"
+  default     = 80
 }
 
 variable "container_image" {
   type        = string
-  description = "The ecr url for the docker image"
+  description = "The url for the docker image"
 }
 
-variable "certificate_domain" {
+variable "domain_name" {
   type        = string
   description = "The primary domain name of the certificate in ACM"
 }
@@ -41,4 +47,5 @@ variable "certificate_domain" {
 variable "ecs_tasks_count" {
   type        = number
   description = "The desired number of ECS tasks"
+  default     = 1
 }

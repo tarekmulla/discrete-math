@@ -28,3 +28,8 @@ variable "certificate_arn" {
   type        = string
   description = "The arn for the acm certificate for the app domain"
 }
+
+variable "container_image" {
+  type        = string
+  description = "The url for the docker image"
+}

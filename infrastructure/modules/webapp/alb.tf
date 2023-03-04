@@ -1,6 +1,6 @@
 # Get the HTTPS certificate for the website
 data "aws_acm_certificate" "certificate" {
-  domain      = var.certificate_domain
+  domain      = "discrete-math-api.${var.domain_name}"
   types       = ["AMAZON_ISSUED"]
   most_recent = true
 }
@@ -8,7 +8,7 @@ data "aws_acm_certificate" "certificate" {
 module "alb" {
   source             = "terraform-aws-modules/alb/aws"
   version            = "~> 6.0"
-  name               = "${var.app}"
+  name               = var.app
   load_balancer_type = "application"
 
   vpc_id          = var.vpc_id
