@@ -28,7 +28,10 @@ def send_request(req_type: Request, path, data: dict = None):
     url = f'{API_ENDPOINT}{path}/'
     error_message = ''
     response = None
-    header_type = {'Content-Type': 'application/json'}
+    header_type = {
+        'Content-Type': 'application/json',
+        'origin': 'https://discrete-math.rmit.mulla.au'
+        }
     try:
         if req_type == Request.GET:
             response = requests.get(url,
@@ -83,9 +86,12 @@ def delete_request(path, data: dict):
         return False
 
 
-def generate_questions(cursor: str) -> list[questionCls]:
+def generate_questions() -> list[questionCls]:
     """get auto-generated questions from the API"""
-    response = get_request('/question', {'Cursor': cursor})
+    response = get_request('/question', {
+        'question_type': 'LSM',
+        'question_number': '3'
+        })
 
     if response:
         questions = []
@@ -93,7 +99,6 @@ def generate_questions(cursor: str) -> list[questionCls]:
         for item in questions_response:
             question = questionCls.load(item)
             questions.append(question)
-        cursor = response['cursor']
-        return {'questions': questions, 'cursor': cursor}
+        return questions
     else:
         return None

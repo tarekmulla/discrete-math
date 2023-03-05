@@ -77,7 +77,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         # TODO: change to a more secure login-checking mechanism
-        if username == 's3992651@student.rmit.edu.au' and password == 's3992651':
+        if username == 'rmit@rmit.au' and password == 'rmit':
             session["username"] = username
             return redirect("/")
         else:
@@ -111,7 +111,10 @@ def index():
         alert_cat = Alert.Category[alert_dict['category']]
         alerts.append(Alert(alert_msg, alert_cat))
 
+    questions = generate_questions()
+
     return render_template("index.html",
+                           questions=questions,
                            alerts=alerts,
                            username=username,
                            current_page='Home')

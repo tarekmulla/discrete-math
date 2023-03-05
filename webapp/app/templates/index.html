@@ -1,7 +1,13 @@
 {% extends "layout.html" %} {% block title %} Home {% endblock %} {% block main %}
-
+<div>Questions: </div>
 <div class="row">
-    
+    {% if questions %}
+        {% for question in questions %}
+        <div>
+            {{question}}
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}
