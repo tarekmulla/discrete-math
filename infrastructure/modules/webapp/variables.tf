@@ -39,7 +39,7 @@ variable "container_image" {
   description = "The url for the docker image"
 }
 
-variable "domain_name" {
+variable "website_domain" {
   type        = string
   description = "The primary domain name of the certificate in ACM"
 }
@@ -48,4 +48,14 @@ variable "ecs_tasks_count" {
   type        = number
   description = "The desired number of ECS tasks"
   default     = 1
+}
+
+variable "certificate_arn" {
+  type        = string
+  description = "The arn for the acm certificate for the app domain"
+}
+
+variable "route53_zone_id" {
+  type        = string
+  description = "The route53 zone ID for all applications"
 }

@@ -1,9 +1,5 @@
-data "aws_route53_zone" "api" {
-  name = var.domain_name
-}
-
 resource "aws_api_gateway_domain_name" "api" {
-  domain_name              = "${var.app}-api.${var.domain_name}"
+  domain_name              = var.api_domain
   regional_certificate_arn = var.certificate_arn
 
   endpoint_configuration {
@@ -20,7 +16,7 @@ resource "aws_api_gateway_base_path_mapping" "api" {
 resource "aws_route53_record" "api" {
   name    = aws_api_gateway_domain_name.api.domain_name
   type    = "A"
-  zone_id = data.aws_route53_zone.api.id
+  zone_id = var.route53_zone_id
 
   alias {
     evaluate_target_health = true

@@ -16,8 +16,9 @@ module "question_api" {
   app              = var.app
   region           = var.region
   lambda_layer_arn = module.lambda_layer.layer_arn
-  domain_name      = var.domain_name
-  certificate_arn  = var.certificate_arn
+  api_domain       = local.api_endpoint
+  certificate_arn  = local.certificate_arn
+  route53_zone_id  = local.route53_zone_id
   tags             = local.tags
 }
 
@@ -25,10 +26,12 @@ module "webapp" {
   source             = "./modules/webapp"
   app                = var.app
   region             = var.region
-  vpc_id             = var.vpc_id
-  public_subnet_ids  = var.vpc_public_subnets
-  private_subnet_ids = var.vpc_private_subnets
-  domain_name        = var.domain_name
-  container_image    = var.container_image
+  vpc_id             = local.vpc_id
+  public_subnet_ids  = local.vpc_public_subnets
+  private_subnet_ids = local.vpc_private_subnets
+  website_domain     = local.website_domain
+  container_image    = local.container_image
+  certificate_arn    = local.certificate_arn
+  route53_zone_id    = local.route53_zone_id
   tags               = local.tags
 }
