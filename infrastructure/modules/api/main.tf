@@ -22,5 +22,28 @@ module "generate_question" {
   resource_id      = aws_api_gateway_resource.question.id
   api_exec_arn     = aws_api_gateway_rest_api.api.execution_arn
   lambda_layer_arn = var.lambda_layer_arn
+  website_domain   = var.website_domain
   tags             = var.tags
+}
+
+module "cors_options" {
+  source           = "./cors"
+  app              = var.app
+  api_id           = aws_api_gateway_rest_api.api.id
+  api_exec_arn     = aws_api_gateway_rest_api.api.execution_arn
+  lambda_layer_arn = var.lambda_layer_arn
+  website_domain   = var.website_domain
+  api_resources = {
+    "question" = {
+      id = aws_api_gateway_resource.question.id
+    }
+  }
+  tags = var.tags
+}
+
+module "firewall" {
+  source        = "./waf"
+  app           = var.app
+  api_stage_arn = aws_api_gateway_stage.apigw_stage.arn
+  tags          = var.tags
 }

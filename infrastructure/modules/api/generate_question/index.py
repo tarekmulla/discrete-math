@@ -14,8 +14,10 @@ class QuestionType(Enum):
 def lambda_handler(event, context):
     # pylint: disable=unused-argument
     '''generate questions randomly'''
+    origin = ''
     try:
         # retrieve the parameters from the request
+        origin = layer.get_origin(event['headers'])
         question_type = None
         question_number = 0
         if event['body']:
@@ -34,9 +36,9 @@ def lambda_handler(event, context):
     except Exception as ex:  # pylint: disable=broad-exception-caught
         message = 'Error while generating questions'
         LOGGER.error(f'{message}, more info: {str(ex)}')
-        return layer.http_response(500, dumps({'error': message}))
+        return layer.http_response(500, dumps({'error': message}), origin)
 
     # return success response, with all items details
     return layer.http_response(200, dumps({
         'questions': questions
-        }))
+        }), origin)

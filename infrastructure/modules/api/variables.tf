@@ -18,6 +18,11 @@ variable "lambda_layer_arn" {
   description = "The Invoke ARN of the Lambda layer"
 }
 
+variable "website_domain" {
+  type        = string
+  description = "The primary domain name of the certificate in ACM"
+}
+
 variable "api_domain" {
   type        = string
   description = "The domain name for the api"

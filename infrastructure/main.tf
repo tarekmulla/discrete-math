@@ -16,6 +16,7 @@ module "question_api" {
   app              = var.app
   region           = var.region
   lambda_layer_arn = module.lambda_layer.layer_arn
+  website_domain   = local.website_domain
   api_domain       = local.api_endpoint
   certificate_arn  = local.certificate_arn
   route53_zone_id  = local.route53_zone_id

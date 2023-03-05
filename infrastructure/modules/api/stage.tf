@@ -8,11 +8,14 @@ resource "aws_api_gateway_deployment" "api_deploy" {
   rest_api_id = aws_api_gateway_rest_api.api.id
 
   triggers = {
-    redeployment = sha1(jsonencode([
+    redeployment = sha1(jsonencode(concat([
       aws_api_gateway_resource.question.id,
       module.generate_question.method_id,
       module.generate_question.integration_id
-    ]))
+      ],
+      module.cors_options.cors_method_ids,
+      module.cors_options.cors_integration_ids
+    )))
   }
 
   lifecycle {
