@@ -33,3 +33,18 @@ variable "container_image" {
   type        = string
   description = "The url for the docker image"
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "The shared netwrok VPC Id"
+}
+
+variable "vpc_public_subnets" {
+  type        = list(string)
+  description = "List of IDs of public subnets"
+}
+
+variable "vpc_private_subnets" {
+  type        = list(string)
+  description = "List of IDs of private subnets"
+}

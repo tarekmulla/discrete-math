@@ -1,6 +1,6 @@
 # Get the HTTPS certificate for the website
 data "aws_acm_certificate" "certificate" {
-  domain      = "discrete-math-api.${var.domain_name}"
+  domain      = "${var.app}.${var.domain_name}"
   types       = ["AMAZON_ISSUED"]
   most_recent = true
 }

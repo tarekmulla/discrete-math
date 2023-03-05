@@ -47,8 +47,8 @@ resource "aws_ecs_service" "web-app" {
     security_groups = [
       aws_security_group.fargate.id
     ]
-    subnets          = var.public_subnet_ids
-    assign_public_ip = true
+    subnets          = var.private_subnet_ids
+    assign_public_ip = false
   }
   health_check_grace_period_seconds = 300
 }
