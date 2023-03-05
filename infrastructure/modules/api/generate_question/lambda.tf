@@ -13,7 +13,7 @@ module "generate_question_lambda" {
   cloudwatch_logs_retention_in_days = 14
 
   environment_variables = {
-    APP        = var.app
+    APP = var.app
   }
 
   tags = var.tags
