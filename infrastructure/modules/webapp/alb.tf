@@ -1,10 +1,3 @@
-# Get the HTTPS certificate for the website
-data "aws_acm_certificate" "certificate" {
-  domain      = "${var.app}.${var.domain_name}"
-  types       = ["AMAZON_ISSUED"]
-  most_recent = true
-}
-
 module "alb" {
   source             = "terraform-aws-modules/alb/aws"
   version            = "~> 6.0"
@@ -40,7 +33,7 @@ module "alb" {
     {
       port               = 443
       protocol           = "HTTPS"
-      certificate_arn    = data.aws_acm_certificate.certificate.arn
+      certificate_arn    = var.certificate_arn
       target_group_index = 0
     }
   ]

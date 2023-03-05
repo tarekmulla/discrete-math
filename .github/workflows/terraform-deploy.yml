@@ -57,11 +57,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
-        env:
-          TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
-          TF_VAR_certificate_arn: ${{ vars.CERTIFICATION_ARN }}
-          TF_VAR_container_image: ${{ vars.ECR_URL }}
-          TF_VAR_vpc_id: ${{ vars.VPC_ID }}
-          TF_VAR_vpc_public_subnets: ${{ vars.PUBLIC_SUBNETS }}
-          TF_VAR_vpc_private_subnets: ${{ vars.PRIVATE_SUBNETS }}
         working-directory: ${{ env.INFRA_PATH }}

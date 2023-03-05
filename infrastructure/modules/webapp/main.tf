@@ -1,7 +1,3 @@
-locals {
-  webapp_domain = "${var.app}.${var.domain_name}"
-}
-
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
