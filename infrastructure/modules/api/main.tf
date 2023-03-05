@@ -40,3 +40,10 @@ module "cors_options" {
   }
   tags = var.tags
 }
+
+module "firewall" {
+  source        = "./waf"
+  app           = var.app
+  api_stage_arn = aws_api_gateway_stage.apigw_stage.arn
+  tags          = var.tags
+}
