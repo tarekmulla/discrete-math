@@ -8,19 +8,14 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "region" {
-  type        = string
-  description = "The aws region where the resources will be provisioned"
-}
-
 variable "api_id" {
   type        = string
   description = "The API Id"
 }
 
-variable "resource_id" {
-  type        = string
-  description = "The container resource Id"
+variable "api_resources" {
+  description = "API resources"
+  type        = map(map(string))
 }
 
 variable "api_exec_arn" {
