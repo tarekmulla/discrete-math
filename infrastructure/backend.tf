@@ -11,10 +11,10 @@ terraform {
   # S3 bucket to store the terraform state file remotly, the bucket should be created manually
   # DynamoDB to lock the terraform state
   backend "s3" {
-    bucket         = "terraform-statefile-rmit-master"
-    key            = "math2415/discrete-math-demo/terraform.tfstate"
+    bucket         = "terraform-statebucket-rmit"
+    key            = "discrete-math/discrete-math-demo/terraform.tfstate"
     region         = "ap-southeast-2"
-    dynamodb_table = "terraform-statelock-rmit-master"
+    dynamodb_table = "terraform-statelock-rmit"
     encrypt        = true
   }
 }

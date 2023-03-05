@@ -21,23 +21,14 @@ module "question_api" {
   tags             = local.tags
 }
 
-# The network components (VPC, subnets, Internet gateway, etc..)
-module "network" {
-  source             = "./modules/network"
-  app                = var.app
-  region             = var.region
-  availability_zones = ["${var.region}a", "${var.region}b"]
-  tags               = local.tags
-}
-
 module "webapp" {
   source             = "./modules/webapp"
   app                = var.app
   region             = var.region
-  vpc_id             = module.network.vpc_id
-  public_subnet_ids  = module.network.vpc_public_subnets
-  private_subnet_ids = module.network.vpc_private_subnets
-  domain_name = var.domain_name
+  vpc_id             = var.vpc_id
+  public_subnet_ids  = var.vpc_public_subnets
+  private_subnet_ids = var.vpc_private_subnets
+  domain_name        = var.domain_name
   container_image    = var.container_image
   tags               = local.tags
 }

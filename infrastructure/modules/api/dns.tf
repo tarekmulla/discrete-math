@@ -3,7 +3,7 @@ data "aws_route53_zone" "api" {
 }
 
 resource "aws_api_gateway_domain_name" "api" {
-  domain_name              = "discrete-math-api.${var.domain_name}"
+  domain_name              = "${var.app}-api.${var.domain_name}"
   regional_certificate_arn = var.certificate_arn
 
   endpoint_configuration {
