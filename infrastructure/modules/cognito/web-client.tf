@@ -20,6 +20,12 @@ resource "aws_cognito_user_pool_client" "client" {
     id_token      = "minutes"
     refresh_token = "days"
   }
+  explicit_auth_flows = [
+    "ALLOW_CUSTOM_AUTH",
+    "ALLOW_REFRESH_TOKEN_AUTH",
+    "ALLOW_USER_PASSWORD_AUTH",
+    "ALLOW_USER_SRP_AUTH",
+  ]
 }
 
 
