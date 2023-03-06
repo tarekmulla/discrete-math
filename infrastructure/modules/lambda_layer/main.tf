@@ -22,8 +22,24 @@ module "lambda_layer" {
   tags = var.tags
 }
 
+resource "null_resource" "install-depndencies" {
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+  provisioner "local-exec" {
+    # when    = create
+    command = <<-EOT
+      cd ${path.module}/source_code/python
+      pip3 install -t . -r requirements.txt
+    EOT
+  }
+}
+
 # Zip the source code so lambda layer use it, the zip should follow specific structure, check aws documentation
 data "archive_file" "layer_archive" {
+  depends_on = [
+    null_resource.install-depndencies
+  ]
   type = "zip"
   excludes = [
     "__pycache__",
