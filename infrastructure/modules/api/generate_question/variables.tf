@@ -37,3 +37,8 @@ variable "website_domain" {
   type        = string
   description = "The primary domain name of the certificate in ACM"
 }
+
+variable "authorizer_id" {
+  type        = string
+  description = "The cognito authorizer id"
+}

@@ -33,3 +33,6 @@ override.tf.json
 # lambda build files
 infrastructure/builds/*
 source_code.zip
+
+# docker env variables
+.env

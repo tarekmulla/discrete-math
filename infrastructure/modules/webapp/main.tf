@@ -1,3 +1,7 @@
+locals {
+  env_vars = [for k, v in var.parameters : { "name" : k, "value" : v }]
+}
+
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
@@ -62,6 +66,7 @@ resource "aws_ecs_task_definition" "web-app" {
       image                  = var.container_image
       essential              = true
       readonlyRootFilesystem = false
+      environment            = local.env_vars
       logConfiguration = {
         logDriver = "awslogs"
         options = {

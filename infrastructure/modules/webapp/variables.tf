@@ -59,3 +59,8 @@ variable "route53_zone_id" {
   type        = string
   description = "The route53 zone ID for all applications"
 }
+
+variable "parameters" {
+  type        = map(string)
+  description = "List of parameters to be added to fargate environment variables"
+}

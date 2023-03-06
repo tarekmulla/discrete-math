@@ -12,8 +12,14 @@ resource "aws_api_gateway_resource" "question" {
   path_part   = "question"
 }
 
-# Each method has a separate module block
+resource "aws_api_gateway_authorizer" "cognito_authorizer" {
+  name          = "${var.app}-cognito-authorizer"
+  type          = "COGNITO_USER_POOLS"
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  provider_arns = [var.cognito_arn]
+}
 
+# Each method has a separate module block
 module "generate_question" {
   source           = "./generate_question"
   app              = var.app
@@ -23,6 +29,7 @@ module "generate_question" {
   api_exec_arn     = aws_api_gateway_rest_api.api.execution_arn
   lambda_layer_arn = var.lambda_layer_arn
   website_domain   = var.website_domain
+  authorizer_id    = aws_api_gateway_authorizer.cognito_authorizer.id
   tags             = var.tags
 }
 

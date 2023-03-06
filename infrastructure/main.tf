@@ -20,6 +20,7 @@ module "question_api" {
   api_domain       = local.api_endpoint
   certificate_arn  = local.certificate_arn
   route53_zone_id  = local.route53_zone_id
+  cognito_arn      = module.cognito.arn
   tags             = local.tags
 }
 
@@ -34,5 +35,24 @@ module "webapp" {
   container_image    = local.container_image
   certificate_arn    = local.certificate_arn
   route53_zone_id    = local.route53_zone_id
-  tags               = local.tags
+  parameters = {
+    api_endpoint          = local.api_endpoint
+    cognito_domain        = local.cognito_domain
+    logout_urls           = jsonencode(local.logout_urls)
+    callback_urls         = jsonencode(local.callback_urls)
+    cognito_client_id     = module.cognito.client_id
+    cognito_client_secret = module.cognito.client_secret
+  }
+  tags = local.tags
+}
+
+module "cognito" {
+  source                  = "./modules/cognito"
+  app                     = var.app
+  cognito_certificate_arn = var.cognito_certificate_arn
+  route53_zone_id         = local.route53_zone_id
+  cognito_domain          = local.cognito_domain
+  logout_urls             = local.logout_urls
+  callback_urls           = local.callback_urls
+  tags                    = var.tags
 }
