@@ -13,6 +13,7 @@ The purpose of this application is to demonstrate the material of Course [ MATH2
 
 * [Install docker](https://docs.docker.com/get-docker/)
 * [Install docker compose](https://docs.docker.com/compose/install/)
+* Create .env by copying .env.example and update the values
 * Make sure docker is running
 * Run commands that provided in *./Makefile*:
     * `make run`: run the webapp, can be accessed on [localhost:80](https://localhost:80)

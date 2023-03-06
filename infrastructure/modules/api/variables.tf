@@ -37,3 +37,8 @@ variable "route53_zone_id" {
   type        = string
   description = "The route53 zone ID for all applications"
 }
+
+variable "cognito_arn" {
+  type        = string
+  description = "The cognito user pool arn"
+}

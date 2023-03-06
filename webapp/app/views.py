@@ -5,9 +5,11 @@ from tempfile import mkdtemp
 from enum import Enum
 from json import loads
 from app import app
-from app.question import questionCls
 from app.api import generate_questions
+from app.auth import get_session_details
 from flask import render_template, request, session, redirect
+from os import environ
+import ast
 
 
 # Templates are auto-reloaded
@@ -34,15 +36,23 @@ href_dict = {
     'About': '/about'
     }
 
+COGNITO_DOMAIN = environ['cognito_domain']
+COGNITO_CLIENT_ID = environ['cognito_client_id']
+CALLBACK_URLS = ast.literal_eval(environ['callback_urls'])
+LOGOUT_URLS = ast.literal_eval(environ['logout_urls'])
+
+LOGIN_URL = f'https://{COGNITO_DOMAIN}/oauth2/authorize?client_id={COGNITO_CLIENT_ID}&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri={CALLBACK_URLS[0]}'
+LOGOUT_URL = f'https://{COGNITO_DOMAIN}/logout?client_id={COGNITO_CLIENT_ID}&logout_uri={LOGOUT_URLS[0]}'
+
 
 # decorator to check the login before accessing any page
 def login_required(f):
     """Check the login details"""
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get('username') is None:
+        if session.get('access_token') is None:
             # redirect to login page in case not login yet
-            return redirect("/login")
+            return redirect(LOGIN_URL)
         return f(*args, **kwargs)
     return decorated_function
 
@@ -71,22 +81,13 @@ def inject_dict_for_all_templates():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     '''Check login details and store cache for success login'''
-    if request.method == "POST":
-        # Forget any cached username
-        session.clear()
-        username = request.form.get("username")
-        password = request.form.get("password")
-        # TODO: change to a more secure login-checking mechanism
-        if username == 'rmit@rmit.au' and password == 'rmit':
-            session["username"] = username
-            return redirect("/")
-        else:
-            # redirect again to login page, if failed in login
-            return redirect("/login")
-    if 'username' in session:  # already login
+    cognito_code = request.args.get('code')
+    if cognito_code:
+        access_token, username = get_session_details(cognito_code)
+        session["access_token"] = access_token
+        session["username"] = username
         return redirect("/")
-
-    return render_template("login.html", current_page='Home')
+    return redirect(LOGIN_URL)
 
 
 @app.route("/logout")
@@ -94,13 +95,14 @@ def logout():
     """Log user out"""
     # Forget any user_id
     session.clear()
-    return redirect("/login")
+    return redirect(LOGOUT_URL)
 
 
 @app.route("/", methods=["GET"])
 @login_required
 def index():
     '''Homepage, shows list of modules'''
+    access_token = session["access_token"]
     username = session["username"]
     alerts = []
 
@@ -111,7 +113,7 @@ def index():
         alert_cat = Alert.Category[alert_dict['category']]
         alerts.append(Alert(alert_msg, alert_cat))
 
-    questions = generate_questions()
+    questions = generate_questions(access_token)
 
     return render_template("index.html",
                            questions=questions,

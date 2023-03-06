@@ -4,8 +4,8 @@ variable "app" {
 }
 
 variable "tags" {
-  description = "AWS Tags to add to all resources created (where possible)"
   type        = map(string)
+  description = "AWS Tags to add to all resources created (where possible)"
 }
 
 variable "region" {

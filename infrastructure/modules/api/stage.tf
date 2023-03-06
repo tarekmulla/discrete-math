@@ -11,7 +11,8 @@ resource "aws_api_gateway_deployment" "api_deploy" {
     redeployment = sha1(jsonencode(concat([
       aws_api_gateway_resource.question.id,
       module.generate_question.method_id,
-      module.generate_question.integration_id
+      module.generate_question.integration_id,
+      aws_api_gateway_authorizer.cognito_authorizer.id
       ],
       module.cors_options.cors_method_ids,
       module.cors_options.cors_integration_ids
