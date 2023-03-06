@@ -15,7 +15,7 @@ CALLBACK_URLS = ast.literal_eval(environ['callback_urls'])
 
 def get_session_details(code):
     '''Exchange cognito code with token'''
-    url = f'{COGNITO_DOMAIN}/oauth2/token'
+    url = f'https://{COGNITO_DOMAIN}/oauth2/token'
     response = None
     client_auth = f'{COGNITO_CLIENT_ID}:{COGNITO_CLIENT_SECRET}'.encode('utf-8')
     header_type = {
