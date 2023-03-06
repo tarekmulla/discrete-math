@@ -36,8 +36,7 @@ module "webapp" {
   certificate_arn    = local.certificate_arn
   route53_zone_id    = local.route53_zone_id
   parameters = {
-    api_endpoint          = local.api_endpoint
-    cognito_domain        = local.cognito_domain
+    website_domain        = local.website_domain
     logout_urls           = jsonencode(local.logout_urls)
     callback_urls         = jsonencode(local.callback_urls)
     cognito_client_id     = module.cognito.client_id
@@ -47,12 +46,12 @@ module "webapp" {
 }
 
 module "cognito" {
-  source                  = "./modules/cognito"
-  app                     = var.app
-  cognito_certificate_arn = var.cognito_certificate_arn
-  route53_zone_id         = local.route53_zone_id
-  cognito_domain          = local.cognito_domain
-  logout_urls             = local.logout_urls
-  callback_urls           = local.callback_urls
-  tags                    = var.tags
+  source          = "./modules/cognito"
+  app             = var.app
+  route53_zone_id = local.route53_zone_id
+  website_domain  = local.website_domain
+  cognito_domain  = local.cognito_domain
+  logout_urls     = local.logout_urls
+  callback_urls   = local.callback_urls
+  tags            = var.tags
 }

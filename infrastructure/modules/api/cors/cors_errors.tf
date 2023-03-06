@@ -37,7 +37,7 @@ resource "aws_api_gateway_gateway_response" "cors" {
 
   response_parameters = {
     "gatewayresponse.header.Access-Control-Allow-Origin"      = "'*'" // allow all origins for errors
-    "gatewayresponse.header.Access-Control-Allow-Headers"     = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "gatewayresponse.header.Access-Control-Allow-Headers"     = "'Content-Type,Authorization'"
     "gatewayresponse.header.Access-Control-Allow-Methods"     = "'OPTIONS,PUT,POST,GET'"
     "gatewayresponse.header.Access-Control-Allow-Credentials" = "'true'"
   }

@@ -1,4 +1,3 @@
-
 resource "aws_cognito_user_pool_client" "client" {
   name = "${var.app}-client"
 
@@ -23,9 +22,22 @@ resource "aws_cognito_user_pool_client" "client" {
   }
 }
 
+
+# Get the ACM certificate from us-east-1, required for cognito
+provider "aws" {
+  region = "us-east-1"
+  alias  = "virginia"
+}
+data "aws_acm_certificate" "cognito" {
+  domain      = var.website_domain
+  types       = ["AMAZON_ISSUED"]
+  most_recent = true
+  provider    = aws.virginia
+}
+
 resource "aws_cognito_user_pool_domain" "cognito_domain" {
   domain          = var.cognito_domain
-  certificate_arn = var.cognito_certificate_arn
+  certificate_arn = data.aws_acm_certificate.cognito.arn
   user_pool_id    = aws_cognito_user_pool.user_pool.id
 }
 

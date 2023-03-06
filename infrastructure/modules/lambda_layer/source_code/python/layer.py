@@ -28,7 +28,7 @@ def generate_headers(origin):
         origin if origin in allowed_origins
         else allowed_origins[0],
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type,Authorization',
         'Access-Control-Allow-Methods': 'OPTIONS,PUT,POST,GET',
         'Access-Control-Allow-Credentials': 'true'
     }

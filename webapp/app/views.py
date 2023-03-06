@@ -36,7 +36,7 @@ href_dict = {
     'About': '/about'
     }
 
-COGNITO_DOMAIN = environ['cognito_domain']
+COGNITO_DOMAIN = f'cognito.{environ["website_domain"]}'
 COGNITO_CLIENT_ID = environ['cognito_client_id']
 CALLBACK_URLS = ast.literal_eval(environ['callback_urls'])
 LOGOUT_URLS = ast.literal_eval(environ['logout_urls'])

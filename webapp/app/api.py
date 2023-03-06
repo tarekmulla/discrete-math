@@ -5,9 +5,10 @@ from enum import Enum
 import requests
 from app.question import questionCls
 from flask import current_app, session
+from os import environ
 
 
-API_ENDPOINT = "https://discrete-math-api.rmit.mulla.au"
+API_ENDPOINT = f'https://api.{environ["website_domain"]}'
 
 
 class Request(Enum):

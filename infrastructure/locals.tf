@@ -3,14 +3,14 @@ locals {
   route53_zone_id     = data.aws_ssm_parameter.zone_id.value
   certificate_arn     = data.aws_acm_certificate.domains.arn
   website_domain      = data.aws_ssm_parameter.website_domain.value
-  api_endpoint        = data.aws_ssm_parameter.api_endpoint.value
+  api_endpoint        = "api.${local.website_domain}"
+  cognito_domain      = "cognito.${local.website_domain}"
   container_image     = data.aws_ssm_parameter.ecr_image.value
   vpc_id              = data.aws_ssm_parameter.vpc_id.value
   vpc_private_subnets = split(",", replace(replace(replace(data.aws_ssm_parameter.vpc_private_subnets.value, "[", ""), "]", ""), "\"", ""))
   vpc_public_subnets  = split(",", replace(replace(replace(data.aws_ssm_parameter.vpc_public_subnets.value, "[", ""), "]", ""), "\"", ""))
   callback_urls       = ["https://${local.website_domain}/login"]
   logout_urls         = ["https://${local.website_domain}"]
-  cognito_domain      = "login.${local.website_domain}"
 
   tags = merge({
     Name        = "${var.app}"
@@ -28,9 +28,6 @@ data "aws_acm_certificate" "domains" {
 # retrive all ssm parameters related to this app
 data "aws_ssm_parameter" "zone_id" {
   name = "/${var.app}/zone_id"
-}
-data "aws_ssm_parameter" "api_endpoint" {
-  name = "/${var.app}/api_endpoint"
 }
 data "aws_ssm_parameter" "ecr_image" {
   name = "/${var.app}/ecr_image"
