@@ -5,7 +5,7 @@ module "cors_lambda" {
   function_name = "${var.app}-cors"
   description   = "lambda function to generate empty response for options method"
   handler       = "index.lambda_handler"
-  runtime       = "python3.8"
+  runtime       = "python3.9"
   source_path   = "${path.module}/index.py"
 
   layers = [var.lambda_layer_arn]
