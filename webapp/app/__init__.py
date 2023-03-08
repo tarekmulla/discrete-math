@@ -13,13 +13,8 @@ app.logger.setLevel(logging.INFO)
 
 # Templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-
-@app.before_request
-def before_request():
-    '''make session permanent'''
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=300)
+app.config["SESSION_PERMANENT"] = True
+app.permanent_session_lifetime = timedelta(minutes=300)
 
 
 # Ensure responses aren't cached
