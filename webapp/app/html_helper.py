@@ -1,7 +1,7 @@
 '''html helpers file'''
 from functools import wraps
 from app import app
-from flask import session, redirect, current_app  # type: ignore
+from flask import session, redirect, current_app, jsonify  # type: ignore
 import app.config as CONFIG
 from markupsafe import Markup
 
@@ -63,3 +63,9 @@ def login_required(func):
             return redirect(CONFIG.LOGIN_URL)
         return func(*args, **kwargs)
     return decorated_function
+
+
+@app.route("/health")
+def health():
+    """health check for the app"""
+    return jsonify(healthy=True)
