@@ -10,8 +10,10 @@ locals {
   vpc_id              = data.aws_ssm_parameter.vpc_id.value
   vpc_private_subnets = split(",", replace(replace(replace(data.aws_ssm_parameter.vpc_private_subnets.value, "[", ""), "]", ""), "\"", ""))
   vpc_public_subnets  = split(",", replace(replace(replace(data.aws_ssm_parameter.vpc_public_subnets.value, "[", ""), "]", ""), "\"", ""))
-  callback_urls       = ["https://${local.website_domain}/login"]
-  logout_urls         = ["https://${local.website_domain}"]
+  callback_url        = "https://${local.website_domain}/login"
+  logout_url          = "https://${local.website_domain}"
+  local_callback_url  = "http://localhost/login"
+  local_logout_url    = "http://localhost"
 
   tags = merge({
     Name        = "${var.app}"

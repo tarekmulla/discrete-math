@@ -12,12 +12,12 @@ resource "aws_cognito_user_pool_client" "client" {
 
   generate_secret               = true
   prevent_user_existence_errors = "ENABLED"
-  refresh_token_validity        = 60
-  access_token_validity         = 5
-  id_token_validity             = 5
+  access_token_validity         = 360 # 6 Hours
+  id_token_validity             = 360 # 6 Hours
+  refresh_token_validity        = 90  # 3 months
   token_validity_units {
-    access_token  = "minutes"
-    id_token      = "minutes"
+    access_token  = "hours"
+    id_token      = "hours"
     refresh_token = "days"
   }
   explicit_auth_flows = [

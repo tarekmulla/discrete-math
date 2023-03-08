@@ -1,14 +1,13 @@
 '''question class'''
 
 
-class questionCls:
+class QuestionCls:
     '''Class to represent a question'''
     question = ""
 
     def __init__(self, question: str):
         '''Initialize the question parameters'''
         self.question = question
-        #self.options = options
 
     def __str__(self):
         '''String representation for the class'''

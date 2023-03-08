@@ -39,8 +39,8 @@ module "webapp" {
   route53_zone_id    = local.route53_zone_id
   parameters = {
     website_domain        = local.website_domain
-    logout_urls           = jsonencode(local.logout_urls)
-    callback_urls         = jsonencode(local.callback_urls)
+    logout_url            = local.logout_url
+    callback_url          = local.callback_url
     cognito_client_id     = module.cognito.client_id
     cognito_client_secret = module.cognito.client_secret
   }
@@ -53,7 +53,7 @@ module "cognito" {
   route53_zone_id = local.route53_zone_id
   website_domain  = local.website_domain
   cognito_domain  = local.cognito_domain
-  logout_urls     = local.logout_urls
-  callback_urls   = local.callback_urls
+  logout_urls     = [local.logout_url, local.local_logout_url]
+  callback_urls   = [local.callback_url, local_callback_url]
   tags            = var.tags
 }
