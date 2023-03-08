@@ -1,8 +1,7 @@
-# pylint: disable=import-error
 '''API utils file'''
 import base64
-import requests
-import jwt
+import requests  # type: ignore
+import jwt  # type: ignore
 import app.config as CONFIG
 
 

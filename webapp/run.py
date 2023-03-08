@@ -5,6 +5,6 @@ from app import app
 
 if __name__ == "__main__":
     app_port = int(getenv('APP_PORT', '80'))
-    app_address = str(getenv('APP_ADDRESS', '0.0.0.0'))
-    from waitress import serve
+    app_address = getenv('APP_ADDRESS', '0.0.0.0')
+    from waitress import serve  # type: ignore
     serve(app, host=app_address, port=app_port)

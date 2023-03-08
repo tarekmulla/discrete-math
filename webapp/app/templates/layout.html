@@ -16,7 +16,6 @@
 
 <body>
   <div class="container">
-    {% set href_list_keys = href_dict.keys() %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="https://www.rmit.edu.au/">
@@ -31,11 +30,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            {% for element in href_list_keys %}
-            <li class="nav-item">
-              <a class="nav-link {% if element==current_page %}active{% endif %}" {% if element==current_page %}aria-current="page"{% endif %} href="{{ href_dict[element] }}">{{ element }}</a>
-            </li>
-            {% endfor %}
+            {{generate_nav(selected_page)}}
           </ul>
 
           {% if username %}

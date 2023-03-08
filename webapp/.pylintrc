@@ -1,0 +1,25 @@
+[FORMAT]
+#max-branches = 12
+max-args = 10
+max-locals = 29
+max-statements = 100
+max-line-length = 120
+max-attributes = 16
+
+[MESSAGES CONTROL]
+disable=
+    missing-class-docstring,
+    missing-function-docstring,
+    missing-module-docstring,
+    too-few-public-methods,
+    use-dict-literal,
+    import-error
+
+[MISCELLANEOUS]
+notes=FIXME,XXX
+
+[SIMILARITIES]
+min-similarity-lines=8
+ignore-comments = yes
+ignore-docstrings = yes
+ignore-imports = yes

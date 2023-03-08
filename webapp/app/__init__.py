@@ -1,11 +1,9 @@
-# type: ignore
-# pylint: disable=import-error,wrong-import-position
+# pylint: disable=wrong-import-position
 '''Initialize the web application module module'''
 from datetime import timedelta
 from os import getenv, urandom
-from tempfile import mkdtemp
 import logging
-from flask import Flask, session
+from flask import Flask, session  # type: ignore
 
 
 app = Flask(__name__)
@@ -15,10 +13,6 @@ app.logger.setLevel(logging.INFO)
 
 # Templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-# Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
 
 
 @app.before_request
@@ -39,4 +33,7 @@ def after_request(response):
 
 
 from app import views  # noqa: E402
-__all__ = ('views',)
+from app import modules  # noqa: E402
+from app import html_helper  # noqa: E402
+
+__all__ = ('views', 'modules', 'html_helper')

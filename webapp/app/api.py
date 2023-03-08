@@ -1,10 +1,9 @@
-# pylint: disable=import-error
 '''API utils file'''
 import json
 from enum import Enum
-import requests
+import requests  # type: ignore
 from app.question import QuestionCls
-from flask import current_app, session
+from flask import current_app, session  # type: ignore
 import app.config as CONFIG
 
 

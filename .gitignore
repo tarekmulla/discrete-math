@@ -36,3 +36,6 @@ override.tf.json
 
 # docker env variables
 .env
+
+# vscode setting
+.vscode
