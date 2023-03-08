@@ -31,8 +31,8 @@ override.tf.json
 **/__pycache__/*
 
 # lambda build files
-infrastructure/builds/*
-layer.zip
+.tmp/*
+**/lambda_layers/*.zip
 
 # docker env variables
 .env

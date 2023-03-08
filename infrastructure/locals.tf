@@ -1,5 +1,6 @@
 # create a list of tag to be added to all resources (identify resources related to this question)
 locals {
+  bucket_name         = data.aws_ssm_parameter.bucket_name.value
   route53_zone_id     = data.aws_ssm_parameter.zone_id.value
   certificate_arn     = data.aws_acm_certificate.domains.arn
   website_domain      = data.aws_ssm_parameter.website_domain.value
@@ -43,4 +44,7 @@ data "aws_ssm_parameter" "vpc_public_subnets" {
 }
 data "aws_ssm_parameter" "website_domain" {
   name = "/${var.app}/website_domain"
+}
+data "aws_ssm_parameter" "bucket_name" {
+  name = "/${var.app}/bucket_name"
 }

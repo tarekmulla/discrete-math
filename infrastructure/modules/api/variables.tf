@@ -13,9 +13,9 @@ variable "region" {
   description = "The aws region where the resources will be provisioned"
 }
 
-variable "lambda_layer_arn" {
-  type        = string
-  description = "The Invoke ARN of the Lambda layer"
+variable "lambda_layer_arns" {
+  type        = list(string)
+  description = "The Invoke ARNs of the Lambda layers"
 }
 
 variable "website_domain" {
@@ -41,4 +41,9 @@ variable "route53_zone_id" {
 variable "cognito_arn" {
   type        = string
   description = "The cognito user pool arn"
+}
+
+variable "bucket_name" {
+  type        = string
+  description = "The S3 bucket name"
 }

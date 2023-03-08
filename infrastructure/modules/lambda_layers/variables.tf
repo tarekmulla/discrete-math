@@ -12,3 +12,8 @@ variable "region" {
   type        = string
   description = "The aws region where the resources will be provisioned"
 }
+
+variable "bucket_name" {
+  type        = string
+  description = "The S3 bucket name"
+}

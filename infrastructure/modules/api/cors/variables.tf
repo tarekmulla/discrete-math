@@ -23,12 +23,17 @@ variable "api_exec_arn" {
   description = "The arn for API execution"
 }
 
-variable "lambda_layer_arn" {
-  type        = string
-  description = "The Invoke ARN of the Lambda layer"
+variable "lambda_layer_arns" {
+  type        = list(string)
+  description = "The Invoke ARNs of the Lambda layers"
 }
 
 variable "website_domain" {
   type        = string
   description = "The primary domain name of the certificate in ACM"
+}
+
+variable "bucket_name" {
+  type        = string
+  description = "The S3 bucket name"
 }
