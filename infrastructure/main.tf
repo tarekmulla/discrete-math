@@ -54,6 +54,6 @@ module "cognito" {
   website_domain  = local.website_domain
   cognito_domain  = local.cognito_domain
   logout_urls     = [local.logout_url, local.local_logout_url]
-  callback_urls   = [local.callback_url, local_callback_url]
+  callback_urls   = [local.callback_url, local.local_callback_url]
   tags            = var.tags
 }
