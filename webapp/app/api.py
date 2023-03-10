@@ -34,15 +34,18 @@ def send_request(req_type: Request, path: str, data: dict, token):
         if req_type == Request.GET:
             response = requests.get(url,
                                     data=json.dumps(data),
-                                    headers=header_type)
+                                    headers=header_type,
+                                    timeout=5)
         elif req_type == Request.POST:
             response = requests.post(url=url,
                                      data=json.dumps(data),
-                                     headers=header_type)
+                                     headers=header_type,
+                                     timeout=5)
         elif req_type == Request.DELETE:
             response = requests.delete(url=url,
                                        data=json.dumps(data),
-                                       headers=header_type)
+                                       headers=header_type,
+                                       timeout=5)
     except requests.ConnectionError as ex:
         error_message = f'Connection error! more info {str(ex)}'
     except requests.Timeout as ex:
@@ -65,8 +68,7 @@ def get_request(path, data: dict, token):
     response = send_request(Request.GET, path, data, token)
     if response and response.status_code == 200:
         return response.json()
-    else:
-        return {}
+    return False
 
 
 def post_request(path, data: dict, token):
@@ -74,8 +76,7 @@ def post_request(path, data: dict, token):
     response = send_request(Request.POST, path, data, token)
     if response and response.status_code == 200:
         return True
-    else:
-        return False
+    return False
 
 
 def delete_request(path, data: dict, token):
@@ -83,8 +84,7 @@ def delete_request(path, data: dict, token):
     response = send_request(Request.DELETE, path, data, token)
     if response and response.status_code == 200:
         return True
-    else:
-        return False
+    return False
 
 
 def generate_questions(token) -> list[QuestionCls]:
@@ -101,5 +101,4 @@ def generate_questions(token) -> list[QuestionCls]:
             question = QuestionCls.load(item)
             questions.append(question)
         return questions
-    else:
-        return None
+    return None
