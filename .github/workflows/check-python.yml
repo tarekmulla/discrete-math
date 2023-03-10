@@ -1,0 +1,45 @@
+name: Python Check
+
+on:
+  pull_request:
+    paths: ['webapp/**']
+
+  workflow_dispatch: #this attribute will enable the manual run to the pipeline
+
+
+permissions:
+  contents: read
+  pull-requests: write
+
+# Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  python-check:
+    name: Python check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pylint
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Check python format
+        run: |
+          sh ./scripts/check.py
