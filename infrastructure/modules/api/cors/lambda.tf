@@ -10,9 +10,9 @@ data "archive_file" "lambda_source_package" {
 }
 
 resource "aws_s3_object" "lambda_code_zip" {
-  bucket     = var.bucket_name
-  key        = "lambda_zip/function/${local.function_name}"
-  source     = local.zip_path
+  bucket = var.bucket_name
+  key    = "lambda_zip/function/${local.function_name}"
+  source = local.zip_path
 }
 
 module "cors_lambda" {
