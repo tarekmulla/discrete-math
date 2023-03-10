@@ -39,3 +39,10 @@ override.tf.json
 
 # vscode setting
 .vscode
+
+# python virtual env
+**/.venv
+
+# test coverage file
+reports/*
+.coverage

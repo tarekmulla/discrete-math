@@ -11,3 +11,7 @@ generate_layer_zips:
 	@cd ./scripts/ &&\
 	sh generate_lambda_zips.sh &&\
 	sh generate_pandas_zip.sh
+check:
+	@sh ./scripts/check.sh
+format:
+	@sh ./scripts/format.sh
