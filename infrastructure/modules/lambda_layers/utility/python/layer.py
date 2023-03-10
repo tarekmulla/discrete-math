@@ -1,6 +1,7 @@
 '''A lambda layer for all shared methods between lambda functions'''
 import logging
 from os import environ
+from random import randint
 
 
 # Create logger to record system events, will be used by other lambda functions
@@ -42,3 +43,10 @@ def get_origin(headers: dict):
     else:
         raise ValueError("Expect origin in the header")
     return origin
+
+
+def generate_numbers():
+    '''generate 2 random numbers'''
+    num_1 = randint(0, 999)
+    num_2 = randint(0, 999)
+    return num_1, num_2

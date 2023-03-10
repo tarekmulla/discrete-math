@@ -1,5 +1,5 @@
 locals {
-  function_name = "cors"
+  function_name = "gcd"
   zip_path      = "${path.root}/../.tmp/${local.function_name}.zip"
 }
 
@@ -15,13 +15,13 @@ resource "aws_s3_object" "lambda_code_zip" {
   source = local.zip_path
 }
 
-module "cors_lambda" {
+module "gcd_lambda" {
   depends_on = [aws_s3_object.lambda_code_zip]
   source     = "terraform-aws-modules/lambda/aws"
   version    = "4.0.1"
 
-  function_name  = "${var.app}-cors"
-  description    = "lambda function to generate empty response for options method"
+  function_name  = "${var.app}-gcd"
+  description    = "lambda function to do gcd operations"
   handler        = "index.lambda_handler"
   runtime        = "python3.9"
   create_package = false
