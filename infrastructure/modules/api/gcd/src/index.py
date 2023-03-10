@@ -46,6 +46,7 @@ def gcd_calc(a, b, steps_str='', x=0, prev_x=1, y=1, prev_y=0):
     remainder = a % b
     quotient = a // b
 
+    # add a new step
     steps_str += f'{a} = {quotient}({b})'
 
     # if remainder is 0, stop here : gcd found
