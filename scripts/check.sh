@@ -12,8 +12,8 @@ run_check() {
 
 ret=0
 
-run_check ":python:" flake8 ./webapp
+run_check ":python:" flake8 ./webapp --config=./.flake8
 
-run_check ":python:" pylint ./webapp
+run_check ":python:" pylint ./webapp --rcfile=./.pylintrc
 
 exit $ret
