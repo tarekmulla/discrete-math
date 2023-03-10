@@ -12,8 +12,8 @@ PAGES = {
     "Modules": {
         "GCD": "/gcd",
         "LCM": "/lcm",
-        "Prime Numbers": "/prime",
-        "Truth Tables": "/truth",
+        "Prime Numbers": "/factors",
+        "Truth Table": "/truth-table",
     },
 }
 

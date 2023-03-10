@@ -24,6 +24,18 @@ resource "aws_api_gateway_resource" "gcd" {
   path_part   = "gcd"
 }
 
+resource "aws_api_gateway_resource" "factors" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  parent_id   = aws_api_gateway_resource.module.id
+  path_part   = "factors"
+}
+
+resource "aws_api_gateway_resource" "truth_table" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  parent_id   = aws_api_gateway_resource.module.id
+  path_part   = "truth-table"
+}
+
 resource "aws_api_gateway_authorizer" "cognito_authorizer" {
   name          = "${var.app}-cognito-authorizer"
   type          = "COGNITO_USER_POOLS"
@@ -52,6 +64,34 @@ module "gcd" {
   region            = var.region
   api_id            = aws_api_gateway_rest_api.api.id
   resource_id       = aws_api_gateway_resource.gcd.id
+  api_exec_arn      = aws_api_gateway_rest_api.api.execution_arn
+  lambda_layer_arns = var.lambda_layer_arns
+  website_domain    = var.website_domain
+  bucket_name       = var.bucket_name
+  authorizer_id     = aws_api_gateway_authorizer.cognito_authorizer.id
+  tags              = var.tags
+}
+
+module "truth_table" {
+  source            = "./truth_table"
+  app               = var.app
+  region            = var.region
+  api_id            = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.truth_table.id
+  api_exec_arn      = aws_api_gateway_rest_api.api.execution_arn
+  lambda_layer_arns = var.lambda_layer_arns
+  website_domain    = var.website_domain
+  bucket_name       = var.bucket_name
+  authorizer_id     = aws_api_gateway_authorizer.cognito_authorizer.id
+  tags              = var.tags
+}
+
+module "factors" {
+  source            = "./factors"
+  app               = var.app
+  region            = var.region
+  api_id            = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.factors.id
   api_exec_arn      = aws_api_gateway_rest_api.api.execution_arn
   lambda_layer_arns = var.lambda_layer_arns
   website_domain    = var.website_domain

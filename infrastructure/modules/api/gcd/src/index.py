@@ -3,6 +3,9 @@ from json import dumps, loads
 from layer import LOGGER  # pylint: disable=import-error # type: ignore
 import layer  # pylint: disable=import-error # type: ignore
 
+quotients = []
+remainders = []
+
 
 def lambda_handler(event, context):
     # pylint: disable=unused-argument
@@ -29,9 +32,12 @@ def lambda_handler(event, context):
     return layer.http_response(200, dumps({
         'gcd': gcd,
         'lcm': lcm,
-        'result': f'GCD of {num1} and {num2} is {gcd}',
-        'steps': steps,
-        'bezout': f'{gcd} = {x}({num1}) - {y}({num2})'
+        'bezout_x': x,
+        'bezout_y': y,
+        'bezout': f'{gcd} = {x}({num1}) - {y}({num2})',
+        'euclidean_steps': steps,
+        'euclidean_quotients': quotients,
+        'euclidean_remainders': remainders
         }), origin)
 
 
@@ -45,6 +51,9 @@ def gcd_calc(a, b, steps_str='', x=0, prev_x=1, y=1, prev_y=0):
     # calculate the remainder of a/b
     remainder = a % b
     quotient = a // b
+
+    quotients.append(quotient)
+    remainders.append(remainder)
 
     # add a new step
     steps_str += f'{a} = {quotient}({b})'

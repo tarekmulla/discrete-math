@@ -26,10 +26,10 @@ def prime():
     )
 
 
-@app.route("/truth")
+@app.route("/truth-table")
 def truth():
-    """Truth tables"""
+    """Truth table"""
     username = session["username"]
     return render_template(
-        "modules/truth.html", username=username, selected_page="Truth tables"
+        "modules/truth.html", username=username, selected_page="Truth table"
     )
