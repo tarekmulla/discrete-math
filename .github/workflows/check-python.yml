@@ -2,7 +2,6 @@ name: Python Check
 
 on:
   pull_request:
-    paths: ['webapp/**']
 
   workflow_dispatch: #this attribute will enable the manual run to the pipeline
 
