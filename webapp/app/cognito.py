@@ -30,11 +30,10 @@ def send_exch_token_request(code: str):
         'client_secret': CONFIG.COGNITO_CLIENT_SECRET,
         'redirect_uri': CONFIG.CALLBACK_URL
     }
-    response = requests.post(url=url, data=body, headers=header_type)
+    response = requests.post(url=url, data=body, headers=header_type, timeout=5)
     if response.status_code == 200:
         return response.json()
-    else:
-        return {}
+    return {}
 
 
 def get_session_details(code: str):
@@ -49,5 +48,4 @@ def get_session_details(code: str):
             'token': access_token,
             'username': user_details['email']
         }
-    else:
-        return None, None
+    return {}

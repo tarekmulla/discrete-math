@@ -1,10 +1,28 @@
 '''views file'''
+from datetime import timedelta
 from app import app
 from app.api import generate_questions
 from app.cognito import get_session_details
 from flask import render_template, request, session, redirect  # type: ignore
 import app.config as CONFIG
 from app.html_helper import login_required
+
+
+@app.before_request
+def before_request():
+    '''make session permanent'''
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=300)
+
+
+# Ensure responses aren't cached
+@app.after_request
+def after_request(response):
+    '''after_request'''
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
 
 
 @app.route("/login", methods=["GET", "POST"])

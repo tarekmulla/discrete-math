@@ -43,16 +43,6 @@
       </div>
     </nav>
 
-    {% if alerts %}
-    <header>
-        {% for alert in alerts %}
-        <div class="alert alert-{{ alert.category.value }} border text-center" role="alert">
-            {{ alert.message }}
-        </div>
-        {% endfor %}
-    </header>
-    {% endif %}
-
     {% block main %}{% endblock %}
 
     <!-- Bootstrap JS -->

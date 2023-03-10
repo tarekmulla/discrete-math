@@ -1,36 +1,24 @@
-# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position, cyclic-import
 '''Initialize the web application module module'''
-from datetime import timedelta
 from os import getenv, urandom
 import logging
-from flask import Flask, session  # type: ignore
+from flask import Flask  # type: ignore
 
 
-app = Flask(__name__)
+def create_app():
+    '''create flask application'''
+    flask_app = Flask(__name__)
 
-app.secret_key = str(getenv('APP_SECRET_KEY', urandom(12)))
-app.logger.setLevel(logging.INFO)
+    flask_app.secret_key = str(getenv('APP_SECRET_KEY', urandom(12)))
+    flask_app.logger.setLevel(logging.INFO)  # pylint: disable=no-member
 
-# Templates are auto-reloaded
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+    # Templates are auto-reloaded
+    flask_app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-
-@app.before_request
-def before_request():
-    '''make session permanent'''
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=300)
+    return flask_app
 
 
-# Ensure responses aren't cached
-@app.after_request
-def after_request(response):
-    '''after_request'''
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    response.headers["Expires"] = 0
-    response.headers["Pragma"] = "no-cache"
-    return response
-
+app = create_app()
 
 from app import views  # noqa: E402
 from app import modules  # noqa: E402
