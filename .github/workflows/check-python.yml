@@ -41,4 +41,4 @@ jobs:
 
       - name: Check python format
         run: |
-          sh ./scripts/check.py
+          sh ./scripts/check.sh
