@@ -1,0 +1,54 @@
+{% extends "layout.html" %} {% block title %} Factors {% endblock %} {% block main %}
+
+<div class="container module-container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <form action="/factors" method="POST">
+                <div class="form-row mt-2 mb-2">
+                    <div class="form-group col">
+                        <label for="number">Enter positive integer number in range (0-9999)</label>
+                        <input type="number" class="form-control" name="number"
+                        placeholder="Enter positive integer number" min="0" max="9999" step="1">
+                    </div>
+                </div>
+                <div class="form-row mt-2 mb-2">
+                    <div class="form-group col d-flex justify-content-center">
+                        <button class="btn btn-primary" type="submit">Find factors</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <div class="factors-response">
+                {% if num_factors %}
+                    {%set factors_len = num_factors.factors|length%}
+                    <table class="factors-tbl">
+                        <tr>
+                            <th colspan="{{factors_len}}">number {{num_factors.number}} has {{factors_len}} factors</th>
+                          </tr>
+                        <tr>
+                            {% for factor in num_factors.factors %}
+                            <td>{{factor}}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+
+                    <br><br>
+
+                    {%set prime_factors_len = num_factors.prime_factors|length%}
+                    <table class="factors-tbl">
+                        <tr>
+                            <th colspan="{{prime_factors_len}}">number {{num_factors.number}} has following prime factors</th>
+                        </tr>
+                        <tr>
+                            {% for factor in num_factors.prime_factors %}
+                                {%set prime, power = factor%}
+                                <td>{{prime}}<sup>{{power}}</sup></td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

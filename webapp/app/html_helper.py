@@ -10,9 +10,8 @@ PAGES = {
     "Home": "/",
     "About": "/about",
     "Modules": {
-        "GCD": "/gcd",
-        "LCM": "/lcm",
-        "Prime Numbers": "/factors",
+        "GCD & LCM": "/gcd",
+        "Factors": "/factors",
         "Truth Table": "/truth-table",
     },
 }
