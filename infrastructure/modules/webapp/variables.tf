@@ -31,7 +31,7 @@ variable "private_subnet_ids" {
 variable "container_port" {
   type        = number
   description = "Container port"
-  default     = 80
+  default     = 8080
 }
 
 variable "container_image" {
