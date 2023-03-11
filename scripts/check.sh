@@ -22,11 +22,11 @@ run_check "🐼 black: code formatter - " black --check --diff --color .
 
 run_check "🐉 isort: check imports sorting - " isort --check --diff --color --settings-path=./pyproject.toml .
 
-run_check "🔐 bandit: security linter - " bandit -r . -c=./pyproject.toml
-
 run_check "🎯 mypy: static type checker - " mypy . --config-file=./pyproject.toml
 
 run_check "🔩 pylint: static code analysis - " pylint . --rcfile=./pyproject.toml
+
+run_check "🔐 bandit: security linter - " bandit -r . -c=./pyproject.toml
 
 # todo: increase the fail rate
 run_check "🐍" pytest \

@@ -1,5 +1,6 @@
 '''Lambda function to generate Truth table'''
 from json import dumps, loads
+from truth_table import generate_truth_table
 from layer import LOGGER
 import layer
 
@@ -19,6 +20,7 @@ def lambda_handler(event, context):
             if 'proposition' in body_data and body_data['proposition']:
                 proposition = str(body_data['proposition'])
         LOGGER.info(f'Received proposition: {proposition}')
+        rows, prop_type = generate_truth_table(proposition)
 
     except Exception as ex:
         message = 'Error while generating Truth table'
@@ -27,5 +29,6 @@ def lambda_handler(event, context):
 
     # return success response, with all items details
     return layer.http_response(200, dumps({
-        'proposition': proposition
+        'table': rows,
+        'type': str(prop_type.value)
         }), origin)

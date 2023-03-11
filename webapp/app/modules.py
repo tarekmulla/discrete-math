@@ -2,9 +2,10 @@
 from flask import render_template, request, session
 
 from app import app
-from app.api import calculate_gcd, get_factors
+from app.api import calculate_gcd, generate_truth_table, get_factors
 from app.classes.factors import FactorsCls
 from app.classes.pair import PairCls
+from app.classes.proposition import PropositionCls
 from app.html_helper import login_required
 
 
@@ -47,10 +48,19 @@ def factors():
     )
 
 
-@app.route("/truth-table")
+@app.route("/truth", methods=["GET", "POST"])
 def truth():
     """Truth table"""
     username = session["username"]
+    token = session["token"]
+    prop_exp = request.form.get("proposition")
+    proposition = None
+    if prop_exp:
+        proposition = PropositionCls(prop_exp)
+        generate_truth_table(proposition, token)
     return render_template(
-        "modules/truth.html", username=username, selected_page="Truth table"
+        "modules/truth.html",
+        username=username,
+        selected_page="Truth table",
+        proposition=(proposition if proposition else None),
     )
