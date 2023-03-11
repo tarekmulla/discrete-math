@@ -44,5 +44,5 @@ override.tf.json
 **/.venv
 
 # test coverage file
-reports/*
+**/reports/*
 .coverage

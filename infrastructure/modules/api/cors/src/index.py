@@ -1,7 +1,7 @@
 '''Lambda function to generate empty response for options method'''
 from json import dumps
-from layer import LOGGER  # pylint: disable=import-error # type: ignore
-import layer  # pylint: disable=import-error # type: ignore
+from layer import LOGGER
+import layer
 
 
 def lambda_handler(event, context):
@@ -11,7 +11,7 @@ def lambda_handler(event, context):
         # retrieve the origin from the request header
         origin = layer.get_origin(event['headers'])
         LOGGER.info(f'Request origin: {origin}')
-    except Exception as ex:  # pylint: disable=broad-exception-caught
+    except Exception as ex:
         message = 'Error while retrieving origin'
         LOGGER.error(f'{message}, more info: {str(ex)}')
         return layer.http_response(500, dumps({'error': message}), origin)

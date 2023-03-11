@@ -1,9 +1,10 @@
 """cognito operations file"""
 import base64
 
+import jwt
+import requests
+
 import app.config as CONFIG
-import jwt  # type: ignore
-import requests  # type: ignore
 
 
 def get_auth_header():

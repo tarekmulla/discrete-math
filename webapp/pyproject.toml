@@ -1,0 +1,29 @@
+[tool.isort]
+profile = "hug"
+src_paths = ["app", "tests"]
+
+
+[tool.pylint]
+max-args = 10
+max-locals = 29
+max-statements = 100
+max-line-length = 120
+max-attributes = 16
+disable = [
+"E0401",
+"F0010",
+"W0718" # disable=broad-exception-caught
+]
+
+
+[tool.mypy]
+module = "app.*"
+ignore_errors = true
+
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+
+[tool.pyright]
+reportMissingImports = "information"

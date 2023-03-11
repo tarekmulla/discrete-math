@@ -1,7 +1,7 @@
 '''Lambda function to generate questions'''
 from json import dumps, loads
-from layer import LOGGER  # pylint: disable=import-error # type: ignore
-import layer  # pylint: disable=import-error # type: ignore
+from layer import LOGGER
+import layer
 
 
 def lambda_handler(event, context):
@@ -23,7 +23,7 @@ def lambda_handler(event, context):
         gcd, x, y, steps, quotients, remainders = gcd_calc(num1, num2, [], [], [])
         lcm = (num1*num2)//gcd  # least common multiple
 
-    except Exception as ex:  # pylint: disable=broad-exception-caught
+    except Exception as ex:
         message = 'Error while calculating GCD'
         LOGGER.error(f'{message}, more info: {str(ex)}')
         return layer.http_response(500, dumps({'error': message}), origin)

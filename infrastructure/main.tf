@@ -53,7 +53,7 @@ module "cognito" {
   route53_zone_id = local.route53_zone_id
   website_domain  = local.website_domain
   cognito_domain  = local.cognito_domain
-  logout_urls     = [local.logout_url, local.local_logout_url]
-  callback_urls   = [local.callback_url, local.local_callback_url]
+  logout_urls     = concat([local.logout_url], local.local_logout_url)
+  callback_urls   = concat([local.callback_url], local.local_callback_url)
   tags            = var.tags
 }
