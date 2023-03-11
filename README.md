@@ -1,6 +1,6 @@
-[![Python lint and static code Check](https://github.com/tarekmulla/discrete-math/actions/workflows/check-python.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/check-python.yml)
-[![Terraform prod deployment](https://github.com/tarekmulla/discrete-math/actions/workflows/terraform-deploy.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/terraform-deploy.yml)
-[![ECR Image generate](https://github.com/tarekmulla/discrete-math/actions/workflows/ecr-image.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/ecr-image.yml)
+[![Python Check](https://github.com/tarekmulla/discrete-math/actions/workflows/check-python.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/check-python.yml)
+[![Terraform deployment](https://github.com/tarekmulla/discrete-math/actions/workflows/terraform-deploy.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/terraform-deploy.yml)
+[![ECR Image](https://github.com/tarekmulla/discrete-math/actions/workflows/ecr-image.yml/badge.svg)](https://github.com/tarekmulla/discrete-math/actions/workflows/ecr-image.yml)
 
 <p align="center">
   <img src="/docs/images/math-logo.svg" alt="Logo" width="300"/>
