@@ -14,7 +14,6 @@ def get_auth_header():
     return auth_header
 
 
-@staticmethod  # type: ignore
 def send_exch_token_request(code: str):
     """send exchange token request to cognito"""
     url = CONFIG.GET_TOKEN_URL
