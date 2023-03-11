@@ -1,4 +1,4 @@
-resource "aws_api_gateway_method" "truth_table" {
+resource "aws_api_gateway_method" "proposition" {
   rest_api_id   = var.api_id
   resource_id   = var.resource_id
   http_method   = "GET"
@@ -10,12 +10,12 @@ resource "aws_api_gateway_method" "truth_table" {
   authorizer_id = var.authorizer_id
 }
 
-resource "aws_api_gateway_integration" "truth_table_lambda_integration" {
+resource "aws_api_gateway_integration" "proposition_lambda_integration" {
   rest_api_id = var.api_id
-  resource_id = aws_api_gateway_method.truth_table.resource_id
-  http_method = aws_api_gateway_method.truth_table.http_method
+  resource_id = aws_api_gateway_method.proposition.resource_id
+  http_method = aws_api_gateway_method.proposition.http_method
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = module.truth_table_lambda.lambda_function_invoke_arn
+  uri                     = module.proposition_lambda.lambda_function_invoke_arn
 }
