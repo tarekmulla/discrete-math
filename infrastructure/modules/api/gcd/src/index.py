@@ -3,9 +3,6 @@ from json import dumps, loads
 from layer import LOGGER  # pylint: disable=import-error # type: ignore
 import layer  # pylint: disable=import-error # type: ignore
 
-quotients = []
-remainders = []
-
 
 def lambda_handler(event, context):
     # pylint: disable=unused-argument
@@ -20,7 +17,10 @@ def lambda_handler(event, context):
                 num1 = max(int(body_data['num1']), int(body_data['num2']))
                 num2 = min(int(body_data['num1']), int(body_data['num2']))
         LOGGER.info(f'Received parameters: {num1}, {num2}')
-        gcd, x, y, steps = gcd_calc(num1, num2)
+        quotients = []
+        remainders = []
+        steps = []
+        gcd, x, y, steps, quotients, remainders = gcd_calc(num1, num2, [], [], [])
         lcm = (num1*num2)//gcd  # least common multiple
 
     except Exception as ex:  # pylint: disable=broad-exception-caught
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
         }), origin)
 
 
-def gcd_calc(a, b, steps_str='', x=0, prev_x=1, y=1, prev_y=0):
+def gcd_calc(a, b, steps, quotients, remainders, x=0, prev_x=1, y=1, prev_y=0):
     '''calculate the GCD and Bézout's using the extended euclidean algorithm
     credit to: https://github.com/BaReinhard/Hacktoberfest-Mathematics/blob/master/algebra/bezout/python/bezout.py'''
     # 'a' has to be greater than 'b'
@@ -56,15 +56,14 @@ def gcd_calc(a, b, steps_str='', x=0, prev_x=1, y=1, prev_y=0):
     remainders.append(remainder)
 
     # add a new step
-    steps_str += f'{a} = {quotient}({b})'
+    step_str = f'{a} = {quotient}({b})'
+    reminder_str = f' + {remainder}' if remainder != 0 else ""
+    steps.append(step_str + reminder_str)
 
     # if remainder is 0, stop here : gcd found
     if remainder == 0:
-        steps_str += ' <-- GCD'
-        return b, x, y, steps_str
-    else:
-        steps_str += f' + {remainder}\n'
+        return b, x, y, steps, quotients, remainders
 
     # else, update x and y, and continue
     prev_x, prev_y, x, y = x, y, quotient*x + prev_x, quotient*y + prev_y
-    return gcd_calc(b, remainder, steps_str, x, prev_x, y, prev_y)
+    return gcd_calc(b, remainder, steps, quotients, remainders, x, prev_x, y, prev_y)

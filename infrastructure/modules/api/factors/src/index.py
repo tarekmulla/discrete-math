@@ -16,7 +16,7 @@ def lambda_handler(event, context):
             if 'number' in body_data and body_data['number']:
                 number = int(body_data['number'])
         LOGGER.info(f'Received number: {number}')
-        prime_factors = generate_prime_factors(90)
+        prime_factors = generate_prime_factors(number)
         factors = get_factors(number)
 
     except Exception as ex:  # pylint: disable=broad-exception-caught

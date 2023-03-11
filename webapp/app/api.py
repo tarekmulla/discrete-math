@@ -4,7 +4,9 @@ from enum import Enum
 
 import app.config as CONFIG
 import requests  # type: ignore
-from app.question import QuestionCls
+from app.classes.factors import FactorsCls
+from app.classes.pair import PairCls
+from app.classes.question import QuestionCls
 from flask import current_app, session  # type: ignore
 
 
@@ -101,3 +103,28 @@ def generate_questions(token) -> list[QuestionCls]:
             questions.append(question)
         return questions
     return []
+
+
+def get_factors(num_factors: FactorsCls, token) -> bool:
+    """get the number factors from the API"""
+    response = get_request("/module/factors", {"number": num_factors.number}, token)
+    if response:
+        num_factors.set_factors(response["factors"])
+        num_factors.set_prime_factors(response["prime_factors"])
+        return True
+    return False
+
+
+def calculate_gcd(pair: PairCls, token) -> bool:
+    """calculate the GCD and LCM"""
+    response = get_request(
+        "module/gcd", {"num1": pair.number1, "num2": pair.number2}, token
+    )
+    if response:
+        pair.gcd = int(response["gcd"])
+        pair.lcm = int(response["lcm"])
+        pair.bezout_x = int(response["bezout_x"])
+        pair.bezout_y = int(response["bezout_y"])
+        pair.set_euclidean_steps(response["euclidean_steps"])
+        return True
+    return False
