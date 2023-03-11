@@ -1,12 +1,13 @@
 """views file"""
 from datetime import timedelta
 
+from flask import redirect, render_template, request, session
+
 import app.config as CONFIG
 from app import app
 from app.api import generate_questions
 from app.cognito import get_session_details
 from app.html_helper import login_required
-from flask import redirect, render_template, request, session  # type: ignore
 
 
 @app.before_request

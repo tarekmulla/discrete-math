@@ -1,8 +1,8 @@
 '''Lambda function to generate questions'''
 from json import dumps, loads
 from enum import Enum
-from layer import LOGGER  # pylint: disable=import-error # type: ignore
-import layer  # pylint: disable=import-error # type: ignore
+from layer import LOGGER
+import layer
 import pandas as pd
 
 
@@ -42,7 +42,7 @@ def lambda_handler(event, context):
                 questions.append({"question": f"GCD {panda_test_df} question"})
             elif question_type == QuestionType.LSM:
                 questions.append({"question": f"LSM {panda_test_df} question"})
-    except Exception as ex:  # pylint: disable=broad-exception-caught
+    except Exception as ex:
         message = 'Error while generating questions'
         LOGGER.error(f'{message}, more info: {str(ex)}')
         return layer.http_response(500, dumps({'error': message}), origin)

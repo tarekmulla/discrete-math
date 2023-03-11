@@ -2,12 +2,13 @@
 import json
 from enum import Enum
 
+import requests
+from flask import current_app, session
+
 import app.config as CONFIG
-import requests  # type: ignore
 from app.classes.factors import FactorsCls
 from app.classes.pair import PairCls
 from app.classes.question import QuestionCls
-from flask import current_app, session  # type: ignore
 
 
 class Request(Enum):

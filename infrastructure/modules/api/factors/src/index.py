@@ -1,7 +1,7 @@
 '''Lambda function to generate factors and check prime'''
 from json import dumps, loads
-from layer import LOGGER  # pylint: disable=import-error # type: ignore
-import layer  # pylint: disable=import-error # type: ignore
+from layer import LOGGER
+import layer
 
 
 def lambda_handler(event, context):
@@ -19,7 +19,7 @@ def lambda_handler(event, context):
         prime_factors = generate_prime_factors(number)
         factors = get_factors(number)
 
-    except Exception as ex:  # pylint: disable=broad-exception-caught
+    except Exception as ex:
         message = 'Error while generating factors and checking prime'
         LOGGER.error(f'{message}, more info: {str(ex)}')
         return layer.http_response(500, dumps({'error': message}), origin)

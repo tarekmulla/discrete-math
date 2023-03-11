@@ -3,7 +3,7 @@
 import logging
 from os import getenv, urandom
 
-from flask import Flask  # type: ignore
+from flask import Flask
 
 
 def create_app():

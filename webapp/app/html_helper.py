@@ -1,10 +1,11 @@
 """html helpers file"""
 from functools import wraps
 
+from flask import current_app, jsonify, redirect, session
+from markupsafe import Markup
+
 import app.config as CONFIG
 from app import app
-from flask import current_app, jsonify, redirect, session  # type: ignore
-from markupsafe import Markup
 
 PAGES = {
     "Home": "/",

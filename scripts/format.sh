@@ -1,5 +1,8 @@
 #!/bin/sh -eu
 
-isort ./webapp
-black ./webapp
-terraform fmt -recursive ./infrastructure
+cd webapp
+isort . --settings-path=./pyproject.toml
+black .
+
+cd ../infrastructure
+terraform fmt -recursive

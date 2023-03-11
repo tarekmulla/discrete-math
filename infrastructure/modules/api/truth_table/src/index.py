@@ -1,7 +1,7 @@
 '''Lambda function to generate Truth table'''
 from json import dumps, loads
-from layer import LOGGER  # pylint: disable=import-error # type: ignore
-import layer  # pylint: disable=import-error # type: ignore
+from layer import LOGGER
+import layer
 
 quotients = []
 remainders = []
@@ -20,7 +20,7 @@ def lambda_handler(event, context):
                 proposition = str(body_data['proposition'])
         LOGGER.info(f'Received proposition: {proposition}')
 
-    except Exception as ex:  # pylint: disable=broad-exception-caught
+    except Exception as ex:
         message = 'Error while generating Truth table'
         LOGGER.error(f'{message}, more info: {str(ex)}')
         return layer.http_response(500, dumps({'error': message}), origin)

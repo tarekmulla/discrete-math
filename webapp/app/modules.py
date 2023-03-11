@@ -1,10 +1,11 @@
 """modules file"""
+from flask import render_template, request, session
+
 from app import app
 from app.api import calculate_gcd, get_factors
 from app.classes.factors import FactorsCls
 from app.classes.pair import PairCls
 from app.html_helper import login_required
-from flask import render_template, request, session  # type: ignore
 
 
 @app.route("/gcd", methods=["GET", "POST"])
