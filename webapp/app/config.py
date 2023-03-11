@@ -7,8 +7,8 @@ API_ENDPOINT = f"https://api.{WEBSITE_DOMAIN}"
 COGNITO_DOMAIN = f"cognito.{WEBSITE_DOMAIN}"
 COGNITO_CLIENT_ID = getenv("cognito_client_id", "")
 COGNITO_CLIENT_SECRET = getenv("cognito_client_secret", "")
-CALLBACK_URL = getenv("callback_url", "localhost/login")
-LOGOUT_URI = getenv("logout_url", "localhost/login")
+CALLBACK_URL = getenv("callback_url", "http://localhost/login")
+LOGOUT_URI = getenv("logout_url", "http://localhost")
 
 LOGIN_URL = f"https://{COGNITO_DOMAIN}/oauth2/authorize?\
 client_id={COGNITO_CLIENT_ID}&\
