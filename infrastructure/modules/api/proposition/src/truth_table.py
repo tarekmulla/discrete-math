@@ -8,9 +8,9 @@ import re
 
 class PropType(Enum):
     '''represnt the proposition type'''
-    TAUTOLOGIES = "Tautologies"
-    CONTRADICTIONS = "Contradictions"
-    CONTINGENCIES = "Contingencies"
+    TAUTOLOGY = "Tautology"
+    CONTRADICTION = "Contradiction"
+    CONTINGENCY = "Contingency"
 
 
 class Proposition:
@@ -100,10 +100,10 @@ def generate_truth_table(expression: str, reverse=True) -> None:
         table_rows.append(row)
         tautology = tautology and res
         contradictions = contradictions or res
-    prop_type = PropType.CONTINGENCIES
+    prop_type = PropType.CONTINGENCY
     if tautology:
-        prop_type = PropType.TAUTOLOGIES
+        prop_type = PropType.TAUTOLOGY
     if not contradictions:
-        prop_type = PropType.CONTRADICTIONS
+        prop_type = PropType.CONTRADICTION
 
     return table_rows, prop_type

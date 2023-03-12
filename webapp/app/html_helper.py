@@ -10,8 +10,8 @@ from app import app
 PAGES = {
     "Home": "/",
     "Modules": {
-        "GCD & LCM": "/gcd",
         "Factors": "/factors",
+        "GCD & LCM": "/gcd",
         "Truth table": "/truth",
     },
     "Architecture": "/architecture",
