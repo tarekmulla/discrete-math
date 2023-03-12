@@ -11,6 +11,13 @@ module "lambda_layers" {
   tags        = local.tags
 }
 
+# the quiz dynambodb table
+module "quiz" {
+  source = "./modules/dynamodb"
+  app    = var.app
+  tags   = local.tags
+}
+
 # The API and its methods
 module "question_api" {
   source            = "./modules/api"
