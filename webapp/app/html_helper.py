@@ -13,7 +13,7 @@ PAGES = {
     "Modules": {
         "GCD & LCM": "/gcd",
         "Factors": "/factors",
-        "Truth Table": "/truth-table",
+        "Truth table": "/truth",
     },
 }
 

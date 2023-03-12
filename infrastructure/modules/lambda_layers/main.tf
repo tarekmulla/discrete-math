@@ -22,6 +22,7 @@ resource "aws_s3_object" "lambda_code_zip" {
   bucket   = var.bucket_name
   key      = "lambda_zip/layer/${each.key}"
   source   = data.archive_file.layer_archive[each.key].output_path
+  etag     = data.archive_file.layer_archive[each.key].output_md5
 }
 
 # Lambda layer to share methods betwen all lambda functions

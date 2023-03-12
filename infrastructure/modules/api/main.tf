@@ -30,10 +30,10 @@ resource "aws_api_gateway_resource" "factors" {
   path_part   = "factors"
 }
 
-resource "aws_api_gateway_resource" "truth_table" {
+resource "aws_api_gateway_resource" "proposition" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   parent_id   = aws_api_gateway_resource.module.id
-  path_part   = "truth-table"
+  path_part   = "proposition"
 }
 
 resource "aws_api_gateway_authorizer" "cognito_authorizer" {
@@ -72,12 +72,12 @@ module "gcd" {
   tags              = var.tags
 }
 
-module "truth_table" {
-  source            = "./truth_table"
+module "proposition" {
+  source            = "./proposition"
   app               = var.app
   region            = var.region
   api_id            = aws_api_gateway_rest_api.api.id
-  resource_id       = aws_api_gateway_resource.truth_table.id
+  resource_id       = aws_api_gateway_resource.proposition.id
   api_exec_arn      = aws_api_gateway_rest_api.api.execution_arn
   lambda_layer_arns = var.lambda_layer_arns
   website_domain    = var.website_domain

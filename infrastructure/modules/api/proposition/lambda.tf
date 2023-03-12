@@ -1,5 +1,5 @@
 locals {
-  function_name = "truth_table"
+  function_name = "proposition"
   zip_path      = "${path.root}/../.tmp/${local.function_name}.zip"
 }
 
@@ -13,14 +13,15 @@ resource "aws_s3_object" "lambda_code_zip" {
   bucket = var.bucket_name
   key    = "lambda_zip/function/${local.function_name}"
   source = local.zip_path
+  etag   = data.archive_file.lambda_source_package.output_md5
 }
 
-module "truth_table_lambda" {
+module "proposition_lambda" {
   depends_on = [aws_s3_object.lambda_code_zip]
   source     = "terraform-aws-modules/lambda/aws"
   version    = "4.0.1"
 
-  function_name  = "${var.app}-truth-table"
+  function_name  = "${var.app}-proposition"
   description    = "lambda function to generate Truth table"
   handler        = "index.lambda_handler"
   runtime        = "python3.9"

@@ -80,3 +80,9 @@
     text-align: center;
     border: 1px solid grey;
 }
+
+.truth-table td,
+.truth-table th
+{
+    text-align: center;
+}

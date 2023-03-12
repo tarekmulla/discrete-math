@@ -8,6 +8,7 @@ from flask import current_app, session
 import app.config as CONFIG
 from app.classes.factors import FactorsCls
 from app.classes.pair import PairCls
+from app.classes.proposition import PropositionCls
 from app.classes.question import QuestionCls
 
 
@@ -127,5 +128,18 @@ def calculate_gcd(pair: PairCls, token) -> bool:
         pair.bezout_x = int(response["bezout_x"])
         pair.bezout_y = int(response["bezout_y"])
         pair.set_euclidean_steps(response["euclidean_steps"])
+        return True
+    return False
+
+
+def generate_truth_table(proposition: PropositionCls, token) -> bool:
+    """get the truth table from the API"""
+    response = get_request(
+        "module/proposition", {"proposition": proposition.prop_exp}, token
+    )
+    current_app.logger.info(response)
+    if response:
+        proposition.prop_type = str(response["type"])
+        proposition.set_truth_table(response["table"])
         return True
     return False
