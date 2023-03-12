@@ -135,7 +135,7 @@ def calculate_gcd(pair: PairCls, token) -> bool:
 def generate_truth_table(proposition: PropositionCls, token) -> bool:
     """get the truth table from the API"""
     response = get_request(
-        "module/truth-table", {"proposition": proposition.prop_exp}, token
+        "module/proposition", {"proposition": proposition.prop_exp}, token
     )
     current_app.logger.info(response)
     if response:
