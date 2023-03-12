@@ -52,9 +52,7 @@ def logout():
 def index():
     """Homepage, shows list of modules"""
     username = session["username"]
-    return render_template(
-        "index.html", username=username, selected_page="Home"
-    )
+    return render_template("index.html", username=username, selected_page="Home")
 
 
 @app.route("/about", methods=["GET"])
@@ -64,9 +62,12 @@ def about():
     username = session["username"]
     return render_template("about.html", username=username, selected_page="About")
 
+
 @app.route("/architecture", methods=["GET"])
 @login_required
 def architecture():
     """Show information about the architecture"""
     username = session["username"]
-    return render_template("architecture.html", username=username, selected_page="Architecture")
+    return render_template(
+        "architecture.html", username=username, selected_page="Architecture"
+    )

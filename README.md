@@ -36,7 +36,7 @@ The following architecture shows all the components in the cloud infrastructure 
 The web application is built using [flask framework](https://flask.palletsprojects.com/), and is hosted in Fargate in AWS. The application uses the web template engine [Jijna](https://jinja.palletsprojects.com) for the [python](https://www.python.org/) programming language.
 
 The web application can be accessed via the URL: [discrete-math.rmit.mulla.au](https://discrete-math.rmit.mulla.au/); The application interacts with the backend by sending requests to the API gateway [api.discrete-math.rmit.mulla.au](api.discrete-math.rmit.mulla.au).
-***Note** that the api gateway required a token to authorize access to its resources.*
+**Note** that the api gateway required a token to authorize access to its resources.*
 
 The web application provides access to the user after they signing in to the website, all user details are saved securely in [Amazon Cognito](https://aws.amazon.com/cognito/).
 
