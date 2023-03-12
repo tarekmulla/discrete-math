@@ -12,7 +12,7 @@ Discrete Math demo is a tool built by [Tarek Mulla](https://www.linkedin.com/in/
 
 The purpose of this application is to demonstrate the material of Course [ MATH2415 - Discrete Mathematics](http://www1.rmit.edu.au/courses/045682) in [RMIT University](https://www.rmit.edu.au/) | [Master of Cyber Security](https://www.rmit.edu.au/study-with-us/levels-of-study/postgraduate-study/masters-by-coursework/master-of-cyber-security-mc159).
 
-<hr>
+
 
 ## Architecture ##
 
@@ -36,11 +36,11 @@ The following architecture shows all the components in the cloud infrastructure 
 The web application is built using [flask framework](https://flask.palletsprojects.com/), and is hosted in Fargate in AWS. The application uses the web template engine [Jijna](https://jinja.palletsprojects.com) for the [python](https://www.python.org/) programming language.
 
 The web application can be accessed via the URL: [discrete-math.rmit.mulla.au](https://discrete-math.rmit.mulla.au/); The application interacts with the backend by sending requests to the API gateway [api.discrete-math.rmit.mulla.au](api.discrete-math.rmit.mulla.au).
-**Note** that the api gateway required a token to authorize access to its resources.*
+
+**Note** that the api gateway required a token to authorize access to its resources.
 
 The web application provides access to the user after they signing in to the website, all user details are saved securely in [Amazon Cognito](https://aws.amazon.com/cognito/).
 
-<hr>
 
 ## Deployment prerequisites ##
 
@@ -48,7 +48,6 @@ Before you provision the infrastructure you will need to make sure the following
 
 1. Make sure the [RMIT nfrastructure](https://github.com/tarekmulla/rmit-infrastructure) is provisioned in the same account the web application will deployed to.
 
-<hr>
 
 ## DevSecOps practices ##
 
@@ -69,7 +68,6 @@ The repository has integration with other tools to check the security for the so
 * [gitguardian](https://www.gitguardian.com/): To scan the opened pull requests and check if it contains secrets or senstive information in the code changes.
 * [Snyk](https://snyk.io/): To scan the source code, and find vulnerabilities in both Terraform and docker images, and suggest security best practices.
 
-<hr>
 
 ## How do I get set up? ##
 
@@ -91,16 +89,14 @@ The repository has integration with other tools to check the security for the so
     * `make run`: run the webapp, can be accessed on [localhost:8080](https://localhost:8080)
     * `make stop`: stop the webapp
 
-<hr>
 
 ## Who do I talk to? ##
 
 You can contact me directly using one of the following:
 * Linkedin: [Tarek Mulla](https://www.linkedin.com/in/tarekmulla/)
-* Personal Email [rmit@mulla.au]((mailto:rmit@mulla.au))
+* Personal Email [rmit@mulla.au](mailto:rmit@mulla.au)
 * University Email [s3992651@student.rmit.edu.au](mailto:s3992651@student.rmit.edu.au)
 
-<hr>
 
 ## Resources ##
 
