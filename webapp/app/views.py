@@ -5,7 +5,6 @@ from flask import redirect, render_template, request, session
 
 import app.config as CONFIG
 from app import app
-from app.api import generate_questions
 from app.cognito import get_session_details
 from app.html_helper import login_required
 
@@ -52,12 +51,8 @@ def logout():
 @login_required
 def index():
     """Homepage, shows list of modules"""
-    token = session["token"]
     username = session["username"]
-    questions = generate_questions(token)
-    return render_template(
-        "index.html", questions=questions, username=username, selected_page="Home"
-    )
+    return render_template("index.html", username=username, selected_page="Home")
 
 
 @app.route("/about", methods=["GET"])
@@ -66,3 +61,13 @@ def about():
     """Show information about the application"""
     username = session["username"]
     return render_template("about.html", username=username, selected_page="About")
+
+
+@app.route("/architecture", methods=["GET"])
+@login_required
+def architecture():
+    """Show information about the architecture"""
+    username = session["username"]
+    return render_template(
+        "architecture.html", username=username, selected_page="Architecture"
+    )

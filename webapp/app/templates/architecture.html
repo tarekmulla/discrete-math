@@ -1,0 +1,17 @@
+{% extends "layout.html" %} {% block title %} Architecture {% endblock %} {% block main %}
+
+<div class="container module-container">
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <p>The project contains 2 parts: Infrastructure, and Web application.</p>
+            <p>The web application is built using flask framework, and is hosted in Fargate in AWS. The application uses the web template engine Jijna for the python programming language.</p>
+            <p>The infrastructure part responsible for provisioning the cloud resources in AWS, this part is built using Terraform. The following architecture shows all the components in the cloud infrastructure:</p>
+            <br>
+            <img src="../static/architecture.svg" width="100%" alt="architecture">
+            <br>
+            <p>For more details, you can check the source code of this application in github, check it out: <a href="https://github.com/tarekmulla/discrete-math">Discrete Math repository</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

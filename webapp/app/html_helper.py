@@ -9,12 +9,13 @@ from app import app
 
 PAGES = {
     "Home": "/",
-    "About": "/about",
     "Modules": {
         "GCD & LCM": "/gcd",
         "Factors": "/factors",
         "Truth table": "/truth",
     },
+    "Architecture": "/architecture",
+    "About": "/about",
 }
 
 
